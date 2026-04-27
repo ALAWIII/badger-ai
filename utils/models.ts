@@ -11,4 +11,11 @@ export interface AIProvider {
   baseUrl: string;
   model?: string;
   requestTemplate: string; // user writes/pastes this
+  responsePath: string;
+}
+
+export interface TemplateVars {
+  prompt: Prompt;
+  provider: AIProvider;
+  selectedText: string;
 }
