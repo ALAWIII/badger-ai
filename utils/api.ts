@@ -1,4 +1,5 @@
 // utils/api.ts
+import { getErrorMessage } from "./errors";
 import { TemplateVars } from "./models";
 
 /**
@@ -22,10 +23,7 @@ function resolveTemplate(vars: TemplateVars): any {
 function extractResponse(data: any, path: string): string {
   return path.split(".").reduce((obj, key) => obj?.[key], data);
 }
-function getErrorMessage(e: unknown): string {
-  if (e instanceof Error) return e.message;
-  return String(e);
-}
+
 export async function sendPrompt(template: TemplateVars): Promise<string> {
   let resolvedOptions: string;
   try {
