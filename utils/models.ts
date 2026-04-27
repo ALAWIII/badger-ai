@@ -9,6 +9,6 @@ export interface AIProvider {
   name: string;
   apiKey: string;
   baseUrl: string;
-  model: string;
+  model?: string;
   requestTemplate: string; // user writes/pastes this
 }
