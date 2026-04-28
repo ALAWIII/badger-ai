@@ -1,5 +1,5 @@
 <template>
-    <div
+    <button
         id="popupicon"
         v-if="visible"
         class="floating-icon"
@@ -7,7 +7,7 @@
         @mousedown.prevent="handleClick"
     >
         🔍
-    </div>
+    </button>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
@@ -24,16 +24,15 @@ function onMouseUp() {
         visible.value = false;
         return;
     }
-
     const rect = selection!.getRangeAt(0).getBoundingClientRect();
-    x.value = rect.left + rect.width / 2 - 16;
-    y.value = rect.bottom + 40;
+    x.value = rect.left + rect.width / 2;
+    y.value = rect.bottom + 5;
     visible.value = true;
 }
 
 function onMouseDown(e: MouseEvent) {
     if ((e.target as HTMLElement).closest(".floating-icon")) return;
-    console.log(x.value, y.value);
+
     visible.value = false;
 }
 
@@ -55,10 +54,12 @@ function handleClick() {
 
 <style>
 .floating-icon {
+    min-height: fit;
+    min-width: fit;
     position: fixed;
-    background: white;
+    z-index: 2147483647;
+    background: cyan;
     border-radius: 8px;
-    padding: 6px 10px;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     font-size: 18px;
