@@ -1,7 +1,7 @@
 <template>
     <div
         id="badger-menu"
-        class="flex flex-col fixed bg-black/80 h-80 w-60 z-2147483647 border-2 border-indigo-600 rounded-2xl"
+        class="flex flex-col fixed bg-black/80 h-80 w-60 z-2147483647 border border-white/20 rounded-2xl"
         :style="{ top: y + 'px', left: x + 'px' }"
     >
         <CopyButtons></CopyButtons>
