@@ -2,11 +2,16 @@
 import "@/assets/main.css";
 import { createApp } from "vue";
 import popupicon from "@/components/iconPopup.vue";
-import { LaHtml5, MdContentcopyRound } from "oh-vue-icons/icons";
+import {
+  LaHtml5,
+  MdContentcopyRound,
+  MdNavigatenextTwotone,
+} from "oh-vue-icons/icons";
 import { addIcons, OhVueIcon } from "oh-vue-icons";
 
 addIcons(LaHtml5);
 addIcons(MdContentcopyRound);
+addIcons(MdNavigatenextTwotone);
 export default defineContentScript({
   matches: ["<all_urls>"],
   main() {
