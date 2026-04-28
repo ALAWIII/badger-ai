@@ -11,26 +11,27 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-
+import { getSelectedText, getSelectionPosition } from "@/utils/selection";
 const visible = ref(false);
 const x = ref(0);
 const y = ref(0);
 
 function onMouseUp() {
-    const selection = window.getSelection();
-    const text = selection?.toString().trim();
+    const text = getSelectedText();
 
     if (!text) {
         visible.value = false;
         return;
     }
-    const rect = selection!.getRangeAt(0).getBoundingClientRect();
-    x.value = rect.left + rect.width / 2;
-    y.value = rect.bottom + 5;
+
+    const rect = getSelectionPosition()!;
+    x.value = rect.left + rect.width / 2 - 16;
+    y.value = rect.bottom + 10;
     visible.value = true;
 }
 
 function onMouseDown(e: MouseEvent) {
+    //It hides the icon when the user clicks anywhere on the page, but keeps it visible if they click the icon itself.
     if ((e.target as HTMLElement).closest(".floating-icon")) return;
 
     visible.value = false;
