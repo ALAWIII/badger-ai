@@ -8,8 +8,10 @@
     >
         🔍
     </button>
+    <Menu :x="x" :y="y"></Menu>
 </template>
 <script setup lang="ts">
+import Menu from "@/components/menu.vue";
 import { ref, onMounted, onUnmounted } from "vue";
 import { getSelectedText, getSelectionPosition } from "@/utils/selection";
 const visible = ref(false);
@@ -49,6 +51,7 @@ onUnmounted(() => {
 
 function handleClick() {
     const text = window.getSelection()?.toString();
+    visible.value = false;
     console.log("Selected:", text);
 }
 </script>
