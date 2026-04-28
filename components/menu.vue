@@ -5,10 +5,12 @@
         :style="{ top: y + 'px', left: x + 'px' }"
     >
         <CopyButtons></CopyButtons>
+        <PromptsList></PromptsList>
     </div>
 </template>
 
 <script setup lang="ts">
+import PromptsList from "@/components/promptList.vue";
 import CopyButtons from "@/components/copyButtons.vue";
 defineProps<{ x: number; y: number }>();
 </script>
