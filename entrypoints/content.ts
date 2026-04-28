@@ -1,4 +1,5 @@
 // content.ts
+import "@/assets/main.css";
 import { createApp } from "vue";
 import popupicon from "@/components/iconPopup.vue";
 
