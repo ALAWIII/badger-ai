@@ -18,8 +18,9 @@
 </template>
 
 <script setup lang="ts">
-const showQMenu = defineModel<Boolean>();
+import { inject, type Ref } from "vue";
+const showQMenu = inject<Ref<Boolean>>("showQMenu");
 function toogleQMenu() {
-    showQMenu.value = !showQMenu.value;
+    showQMenu!.value = !showQMenu!.value;
 }
 </script>

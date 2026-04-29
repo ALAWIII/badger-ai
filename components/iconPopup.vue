@@ -8,10 +8,12 @@ const showMenu = ref(false);
 const showQMenu = ref(false);
 const x = ref(0);
 const y = ref(0);
-const selected = ref("");
+const selectedContent = ref("");
+provide("showQMenu", showQMenu);
+provide("selectedContent", selectedContent);
 function onMouseUp() {
-    selected.value = getSelectedText();
-    if (!selected.value) {
+    selectedContent.value = getSelectedText();
+    if (!selectedContent.value) {
         showIcon.value = false;
         return;
     }
@@ -67,7 +69,7 @@ function handleClick() {
         class="flex fixed z-2147483647 min-w-fit min-h-fit justify-between gap-2"
         :style="{ top: y + 'px', left: x + 'px' }"
     >
-        <Menu v-model="showQMenu" v-if="showMenu"></Menu>
+        <Menu v-if="showMenu"></Menu>
         <QMenu v-if="showQMenu"></QMenu>
     </div>
 </template>
