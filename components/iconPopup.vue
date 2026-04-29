@@ -1,42 +1,47 @@
 <template>
     <button
         id="popupicon"
-        v-if="visible"
+        v-if="showIcon && !showMenu"
         class="floating-icon"
         :style="{ top: y + 'px', left: x + 'px' }"
         @mousedown.prevent="handleClick"
     >
         🔍
     </button>
-    <Menu :x="x" :y="y"></Menu>
+    <Menu :x="x" :y="y" v-if="showMenu"></Menu>
 </template>
 <script setup lang="ts">
 import Menu from "@/components/menu.vue";
 import { ref, onMounted, onUnmounted } from "vue";
 import { getSelectedText, getSelectionPosition } from "@/utils/selection";
-const visible = ref(false);
+const showIcon = ref(false);
+const showMenu = ref(false);
 const x = ref(0);
 const y = ref(0);
-
+const selected = ref("");
 function onMouseUp() {
-    const text = getSelectedText();
-
-    if (!text) {
-        visible.value = false;
+    selected.value = getSelectedText();
+    if (!selected.value) {
+        showIcon.value = false;
         return;
     }
 
     const rect = getSelectionPosition()!;
     x.value = rect.left + rect.width / 2 - 16;
     y.value = rect.bottom + 10;
-    visible.value = true;
+    showIcon.value = true;
 }
 
 function onMouseDown(e: MouseEvent) {
     //It hides the icon when the user clicks anywhere on the page, but keeps it visible if they click the icon itself.
-    if ((e.target as HTMLElement).closest(".floating-icon")) return;
+    if (
+        (e.target as HTMLElement).closest(".floating-icon") ||
+        (e.target as HTMLElement).closest("#badger-menu")
+    )
+        return;
 
-    visible.value = false;
+    showIcon.value = false;
+    showMenu.value = false;
 }
 
 onMounted(() => {
@@ -50,9 +55,8 @@ onUnmounted(() => {
 });
 
 function handleClick() {
-    const text = window.getSelection()?.toString();
-    visible.value = false;
-    console.log("Selected:", text);
+    showIcon.value = false;
+    showMenu.value = true;
 }
 </script>
 
