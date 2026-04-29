@@ -1,21 +1,11 @@
-<template>
-    <button
-        id="popupicon"
-        v-if="showIcon && !showMenu"
-        class="floating-icon"
-        :style="{ top: y + 'px', left: x + 'px' }"
-        @mousedown.prevent="handleClick"
-    >
-        🔍
-    </button>
-    <Menu :x="x" :y="y" v-if="showMenu"></Menu>
-</template>
 <script setup lang="ts">
+import QMenu from "./quickPromptMenu.vue";
 import Menu from "@/components/menu.vue";
 import { ref, onMounted, onUnmounted } from "vue";
 import { getSelectedText, getSelectionPosition } from "@/utils/selection";
 const showIcon = ref(false);
 const showMenu = ref(false);
+const showQMenu = ref(false);
 const x = ref(0);
 const y = ref(0);
 const selected = ref("");
@@ -36,12 +26,14 @@ function onMouseDown(e: MouseEvent) {
     //It hides the icon when the user clicks anywhere on the page, but keeps it visible if they click the icon itself.
     if (
         (e.target as HTMLElement).closest(".floating-icon") ||
-        (e.target as HTMLElement).closest("#badger-menu")
+        (e.target as HTMLElement).closest("#badger-menu") ||
+        (e.target as HTMLElement).closest("#quick-menu")
     )
         return;
 
     showIcon.value = false;
     showMenu.value = false;
+    showQMenu.value = false;
 }
 
 onMounted(() => {
@@ -57,9 +49,28 @@ onUnmounted(() => {
 function handleClick() {
     showIcon.value = false;
     showMenu.value = true;
+    showQMenu.value = false;
 }
 </script>
 
+<template>
+    <button
+        id="popupicon"
+        v-if="showIcon && !showMenu"
+        class="floating-icon"
+        :style="{ top: y + 'px', left: x + 'px' }"
+        @mousedown.prevent="handleClick"
+    >
+        🔍
+    </button>
+    <div
+        class="flex fixed z-2147483647 min-w-fit min-h-fit justify-between"
+        :style="{ top: y + 'px', left: x + 'px' }"
+    >
+        <Menu v-model="showQMenu" v-if="showMenu"></Menu>
+        <QMenu v-if="showQMenu"></QMenu>
+    </div>
+</template>
 <style>
 .floating-icon {
     min-height: fit;
