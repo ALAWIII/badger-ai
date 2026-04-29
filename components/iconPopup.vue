@@ -64,7 +64,7 @@ function handleClick() {
         🔍
     </button>
     <div
-        class="flex fixed z-2147483647 min-w-fit min-h-fit justify-between"
+        class="flex fixed z-2147483647 min-w-fit min-h-fit justify-between gap-2"
         :style="{ top: y + 'px', left: x + 'px' }"
     >
         <Menu v-model="showQMenu" v-if="showMenu"></Menu>
