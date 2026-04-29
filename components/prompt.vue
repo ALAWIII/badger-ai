@@ -10,9 +10,16 @@
         <div
             class="flex-1/12 ml-auto border-l border-white/50 hover:bg-amber-50/20"
         >
-            <button class="p-2 w-full h-full text-white">
+            <button class="p-2 w-full h-full text-white" @click="toogleQMenu">
                 <v-icon name="md-navigatenext-twotone" />
             </button>
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+const showQMenu = defineModel<Boolean>();
+function toogleQMenu() {
+    showQMenu.value = !showQMenu.value;
+}
+</script>
