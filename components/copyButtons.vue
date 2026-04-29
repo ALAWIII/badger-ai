@@ -24,10 +24,11 @@
 </template>
 <script setup lang="ts">
 const selectedContent = inject<Ref<string>>("selectedContent");
+const globalSelection = inject<Ref<Selection | null>>("globalSelection");
 function selectText() {
-    selectedContent!.value = getSelectedText();
+    selectedContent!.value = getSelectedText(globalSelection?.value);
 }
 function selectHtml() {
-    selectedContent!.value = getSelectedHtml();
+    selectedContent!.value = getSelectedHtml(globalSelection?.value);
 }
 </script>
