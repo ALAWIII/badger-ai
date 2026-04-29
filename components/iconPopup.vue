@@ -9,16 +9,25 @@ const showQMenu = ref(false);
 const x = ref(0);
 const y = ref(0);
 const selectedContent = ref("");
+const globalSelection = ref<Selection | null>(null);
+provide("globalSelection", globalSelection);
 provide("showQMenu", showQMenu);
 provide("selectedContent", selectedContent);
+
 function onMouseUp() {
-    selectedContent.value = getSelectedText();
-    if (!selectedContent.value) {
+    if (showQMenu.value || showMenu.value) {
         showIcon.value = false;
         return;
     }
-
-    const rect = getSelectionPosition()!;
+    const selection = window.getSelection();
+    const tempText = getSelectedText(selection!);
+    if (!tempText) {
+        showIcon.value = false;
+        return;
+    }
+    selectedContent.value = tempText;
+    globalSelection.value = selection;
+    const rect = getSelectionPosition(selection!)!;
     x.value = rect.left + rect.width / 2 - 16;
     y.value = rect.bottom + 10;
     showIcon.value = true;
