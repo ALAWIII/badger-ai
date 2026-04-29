@@ -5,9 +5,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "wxt",
+    "dev": "NODE_OPTIONS=--max-old-space-size=4096 wxt ",
     "dev:firefox": "wxt -b firefox",
-    "build": "wxt build",
+    "build": "NODE_OPTIONS=--max-old-space-size=4096 wxt build",
     "build:firefox": "wxt build -b firefox",
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
