@@ -4,7 +4,7 @@
             <button
                 class="w-full h-full p-2 text-center text-nowrap text-white"
             >
-                prompt label active only if the provider is none
+                prompt label active
             </button>
         </div>
         <div
