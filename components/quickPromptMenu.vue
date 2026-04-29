@@ -14,14 +14,16 @@
         <div class="flex flex-col flex-7/12 gap-0.5 w-full">
             <h3 class="flex-1/12 text-center">Quick Edit</h3>
             <textarea class="flex-11/12 w-full outline-none">
-                {{ text }}
+                {{ selectedContent }}
             </textarea>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-defineProps({ text: String });
+import { inject, type Ref } from "vue";
+const selectedContent = inject<Ref<String>>("selectedContent");
+
 /*
 fetch providers list and update the view.
 */
