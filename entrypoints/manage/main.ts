@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import OptionPage from "./optpage.vue";
+import ManagePage from "./manageUi.vue";
 
-const optionPage = createApp(OptionPage);
-optionPage.mount("#options-page");
+const optionPage = createApp(ManagePage);
+optionPage.mount("#manage-page");
