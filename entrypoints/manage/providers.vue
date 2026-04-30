@@ -9,7 +9,7 @@
         >
             <h2 class="flex-11/12">Prompts</h2>
             <div
-                class="flex-1/12 h-full w-full hover:bg-white/20 mr-auto rounded-r-2xl border-l border-white/50"
+                class="flex-1/12 h-full w-full active:bg-white/0 hover:bg-white/20 mr-auto rounded-r-2xl border-l border-white/50"
             >
                 <v-icon name="bi-plus-circle-dotted" class="w-full h-full" />
             </div>
