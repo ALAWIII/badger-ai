@@ -14,7 +14,7 @@
                 <v-icon name="bi-plus-circle-dotted" class="w-full h-full" />
             </div>
         </div>
-        <div class="flex-11/12"></div>
+        <div name="list" class="flex-11/12 overflow-y-scroll w-full"></div>
     </div>
 </template>
 <script setup lang="ts"></script>
