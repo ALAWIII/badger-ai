@@ -17,4 +17,4 @@
         <div class="flex-11/12"></div>
     </div>
 </template>
-<script></script>
+<script setup lang="ts"></script>

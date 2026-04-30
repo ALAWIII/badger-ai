@@ -6,7 +6,7 @@
         <ProviderContainer></ProviderContainer>
     </div>
 </template>
-<script>
-import PromptContainer from "./prompts.vue";
-import ProviderContainer from "./providers.vue";
+<script setup lang="ts">
+import PromptContainer from "@/entrypoints/manage/prompts.vue";
+import ProviderContainer from "@/entrypoints/manage/providers.vue";
 </script>
