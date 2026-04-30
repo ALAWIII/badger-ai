@@ -14,7 +14,10 @@
                 <div
                     class="flex-1/12 h-full w-full hover:bg-white/20 mr-auto rounded-r-2xl"
                 >
-                    hi
+                    <v-icon
+                        name="bi-plus-circle-dotted"
+                        class="w-full h-full"
+                    />
                 </div>
             </div>
             <div class="flex-11/12"></div>
