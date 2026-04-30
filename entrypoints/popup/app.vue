@@ -12,7 +12,7 @@
         <div
             id="options-button"
             class="flex-1/2 flex flex-col cursor-pointer text-white"
-            @click="openSettings"
+            @click="openManagePage"
         >
             <h4 class="text-center flex-1">Add new Providers or Prompts.</h4>
             <button
@@ -25,7 +25,7 @@
     </div>
 </template>
 <script setup lang="ts">
-function openSettings() {
-    browser.runtime.openOptionsPage();
+function openManagePage() {
+    browser.tabs.create({ url: browser.runtime.getURL("/manage.html") });
 }
 </script>
