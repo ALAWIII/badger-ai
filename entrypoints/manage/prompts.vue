@@ -15,18 +15,23 @@
                 <v-icon name="bi-plus-circle-dotted" class="w-full h-full" />
             </div>
         </div>
-        <div id="prom-list" class="flex-11/12 overflow-y-scroll w-full">
+        <div
+            ref="promlist"
+            id="prom-list"
+            class="flex-11/12 overflow-y-scroll w-full"
+        >
             <PromptItem v-for="p in promptsList" :key="p.id" :prompt="p" />
         </div>
         <PromptDialog v-model:dPrompt="newPrompt" />
     </div>
 </template>
 <script setup lang="ts">
-import { getPrompts } from "@/utils/storage";
+import { getPrompts, reorderPrompts } from "@/utils/storage";
 import { Prompt } from "@/utils/models";
 import { ref, onMounted } from "vue";
 import PromptItem from "./promptItem.vue";
 import PromptDialog from "./PromptDialog.vue";
+import { useDraggable } from "vue-draggable-plus";
 import { v4 } from "uuid";
 const promptsList = ref<Prompt[]>([]);
 onMounted(async () => {
@@ -38,4 +43,12 @@ function createNewPrompt() {
     const p: Prompt = { id: v4(), label: "", providerId: "", systemPrompt: "" };
     newPrompt.value = p;
 }
+const promlist = ref<HTMLElement | null>(null);
+const draggable = useDraggable(promlist, promptsList, {
+    animation: 150,
+
+    async onUpdate() {
+        await reorderPrompts(promptsList.value);
+    },
+});
 </script>
