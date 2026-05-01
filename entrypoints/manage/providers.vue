@@ -17,4 +17,9 @@
         <div id="prov-list" class="flex-11/12 overflow-y-scroll w-full"></div>
     </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { AIProvider } from "@/utils/models";
+import { provide } from "vue";
+const providersList = ref<AIProvider[]>([]);
+provide("providerList", providersList);
+</script>
