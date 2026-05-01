@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-row justify-between text-center items-center w-full h-[10%] border border-white/50 rounded-2xl"
+        class="flex flex-row justify-between text-center items-center w-full h-[10%] border border-white/50 rounded-2xl mb-2"
     >
         <div
             name="drag-button"
