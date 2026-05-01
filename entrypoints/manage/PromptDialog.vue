@@ -177,9 +177,6 @@ async function saveDialog() {
     await upsertPrompt(promptsList!.value, draft.value);
     dPrompt.value = draft.value;
     closeDialog();
-    await refreshPrompts();
-}
-async function refreshPrompts() {
     promptsList!.value = [...(await getPrompts())];
 }
 </script>
