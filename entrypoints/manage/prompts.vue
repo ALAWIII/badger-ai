@@ -10,6 +10,7 @@
             <h2 class="flex-11/12">Prompts</h2>
             <div
                 class="flex-1/12 h-full w-full active:bg-white/0 hover:bg-white/20 mr-auto rounded-r-2xl border-l border-white/50"
+                @click="createNewPrompt"
             >
                 <v-icon name="bi-plus-circle-dotted" class="w-full h-full" />
             </div>
@@ -17,6 +18,7 @@
         <div id="prom-list" class="flex-11/12 overflow-y-scroll w-full">
             <PromptItem v-for="p in promptsList" :key="p.id" :prompt="p" />
         </div>
+        <PromptDialog v-model:dPrompt="newPrompt" />
     </div>
 </template>
 <script setup lang="ts">
@@ -24,10 +26,16 @@ import { getPrompts } from "@/utils/storage";
 import { Prompt } from "@/utils/models";
 import { ref, onMounted } from "vue";
 import PromptItem from "./promptItem.vue";
-
+import PromptDialog from "./PromptDialog.vue";
+import { v4 } from "uuid";
 const promptsList = ref<Prompt[]>([]);
 onMounted(async () => {
     promptsList.value = [...(await getPrompts())];
 });
 provide("promptsList", promptsList);
+const newPrompt = ref<Prompt | null>(null);
+function createNewPrompt() {
+    const p: Prompt = { id: v4(), label: "", providerId: "", systemPrompt: "" };
+    newPrompt.value = p;
+}
 </script>
