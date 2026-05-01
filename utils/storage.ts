@@ -34,14 +34,8 @@ export async function deletePrompt(
   await savePrompts(promptsList.filter((p) => p.id !== id));
 }
 // utils/storage.ts
-export async function reorderPrompts(
-  promptsList: Prompt[],
-  from: number,
-  to: number,
-): Promise<void> {
-  const [moved] = promptsList.splice(from, 1);
-  promptsList.splice(to, 0, moved);
-  await savePrompts(promptsList);
+export async function reorderPrompts(promptsList: Prompt[]): Promise<void> {
+  await savePrompts([...promptsList]);
 }
 
 // providers functionalities
@@ -91,10 +85,6 @@ export async function deleteProvider(
 
 export async function reorderProviders(
   providersList: AIProvider[],
-  from: number,
-  to: number,
 ): Promise<void> {
-  const [moved] = providersList.splice(from, 1);
-  providersList.splice(to, 0, moved);
-  await saveProviders(providersList);
+  await saveProviders([...providersList]);
 }
