@@ -131,7 +131,7 @@ import Select from "primevue/select";
 import Button from "primevue/button";
 
 import type { Prompt, AIProvider } from "@/utils/models";
-import { updatePrompt } from "@/utils/storage";
+import { upsertPrompt } from "@/utils/storage";
 const providersList = inject<Ref<AIProvider[]>>("providersList", ref([]));
 const promptsList = inject<Ref<Prompt[]>>("promptsList");
 if (!promptsList) {
@@ -174,7 +174,7 @@ function closeDialog() {
 
 async function saveDialog() {
     if (!draft.value) return;
-    await updatePrompt(promptsList!.value, draft.value);
+    await upsertPrompt(promptsList!.value, draft.value);
     dPrompt.value = draft.value;
     closeDialog();
 }
