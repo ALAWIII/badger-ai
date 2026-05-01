@@ -26,7 +26,7 @@
 </template>
 <script setup lang="ts">
 import { ref, inject, type Ref } from "vue";
-import PromptDialog from "./editDialog.vue";
+import PromptDialog from "./PromptDialog.vue";
 import { AIProvider, Prompt } from "@/utils/models";
 const { prompt } = defineProps<{
     prompt: Prompt;
