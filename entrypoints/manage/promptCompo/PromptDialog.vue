@@ -134,9 +134,6 @@ import type { Prompt, AIProvider } from "@/utils/models";
 import { upsertPrompt } from "@/utils/storage";
 const providersList = inject<Ref<AIProvider[]>>("providersList", ref([]));
 const promptsList = inject<Ref<Prompt[]>>("promptsList");
-if (!promptsList) {
-    throw new Error("promptsList was not provided");
-}
 
 const dPrompt = defineModel<Prompt | null>("dPrompt");
 const draft = ref<Prompt | null>(null);

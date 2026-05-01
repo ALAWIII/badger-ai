@@ -38,10 +38,10 @@ import { getProviders, reorderProviders } from "@/utils/storage";
 import { v4 } from "uuid";
 import { useDraggable } from "vue-draggable-plus";
 
-const providersList = ref<AIProvider[]>([]);
-provide("providersList", providersList);
+const providersList = inject<Ref<AIProvider[]>>("providersList");
+
 onMounted(async () => {
-    providersList.value = [...(await getProviders())];
+    providersList!.value = [...(await getProviders())];
 });
 const newProvider = ref<AIProvider | null>(null);
 function createNewProvider() {
@@ -60,7 +60,7 @@ const draggable = useDraggable(provlist, providersList, {
     animation: 150,
 
     async onUpdate() {
-        await reorderProviders(providersList.value);
+        await reorderProviders(providersList!.value);
     },
 });
 </script>

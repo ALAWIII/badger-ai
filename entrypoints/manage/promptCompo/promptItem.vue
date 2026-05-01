@@ -35,9 +35,7 @@ const { prompt } = defineProps<{
 }>();
 const dPrompt = ref<Prompt | null>(null);
 const promptsList = inject<Ref<Prompt[]>>("promptsList");
-if (!promptsList) {
-    throw new Error("promptsList was not provided");
-}
+
 function openDialog() {
     dPrompt.value = prompt;
 }

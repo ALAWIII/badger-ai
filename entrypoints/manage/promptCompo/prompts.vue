@@ -33,11 +33,10 @@ import PromptItem from "./promptItem.vue";
 import PromptDialog from "./PromptDialog.vue";
 import { useDraggable } from "vue-draggable-plus";
 import { v4 } from "uuid";
-const promptsList = ref<Prompt[]>([]);
+const promptsList = inject<Ref<Prompt[]>>("promptsList");
 onMounted(async () => {
-    promptsList.value = [...(await getPrompts())];
+    promptsList!.value = [...(await getPrompts())];
 });
-provide("promptsList", promptsList);
 const newPrompt = ref<Prompt | null>(null);
 function createNewPrompt() {
     const p: Prompt = { id: v4(), label: "", providerId: "", systemPrompt: "" };
@@ -48,7 +47,7 @@ const draggable = useDraggable(promlist, promptsList, {
     animation: 150,
 
     async onUpdate() {
-        await reorderPrompts(promptsList.value);
+        await reorderPrompts(promptsList!.value);
     },
 });
 </script>

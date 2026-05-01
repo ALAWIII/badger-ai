@@ -3,18 +3,20 @@
         class="flex flex-row justify-between text-center items-center w-full h-[10%] border border-white/50 rounded-2xl mb-2"
     >
         <div
-            name="drag-button"
+            for="drag-button"
             class="flex-1/12 border-l-white/50 h-full hover:bg-white/10 rounded-l-2xl"
         >
             <v-icon name="fa-sort" class="h-full text-green-500" />
         </div>
         <div
-            name="prompt-label"
+            for="provider-label"
             class="flex-10/12 h-full hover:bg-yellow-50/10 place-content-center cursor-pointer"
             @click="openDialog"
-        ></div>
+        >
+            {{ provider.name }}
+        </div>
         <div
-            name="remove-button"
+            for="remove-button"
             class="flex-1/12 border-r-white/50 hover:bg-white/10 h-full rounded-r-2xl"
             @click="removeProvider"
         >
@@ -33,9 +35,7 @@ const { provider } = defineProps<{
 }>();
 const dProvider = ref<AIProvider | null>(null);
 const providersList = inject<Ref<AIProvider[]>>("providersList");
-if (!providersList) {
-    throw new Error("providersList was not provided");
-}
+
 function openDialog() {
     dProvider.value = provider;
 }

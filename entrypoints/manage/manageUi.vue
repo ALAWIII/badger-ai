@@ -9,4 +9,8 @@
 <script setup lang="ts">
 import PromptContainer from "@/entrypoints/manage/promptCompo/prompts.vue";
 import ProviderContainer from "@/entrypoints/manage/providerCompo/providers.vue";
+const providersList = ref<AIProvider[]>([]);
+const promptsList = ref<Prompt[]>([]);
+provide("promptsList", promptsList);
+provide("providersList", providersList);
 </script>
