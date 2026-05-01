@@ -21,7 +21,7 @@
         >
             <v-icon name="bi-trash" class="h-full text-red-600" />
         </div>
-        <PromptDialog v-model:dPrompt="dPrompt" :providers="providersList" />
+        <PromptDialog v-model:dPrompt="dPrompt" />
     </div>
 </template>
 <script setup lang="ts">
@@ -35,5 +35,4 @@ const dPrompt = ref<Prompt | null>(null);
 function openDialog() {
     dPrompt.value = prompt;
 }
-const providersList = inject<Ref<AIProvider[]>>("providersList", ref([]));
 </script>
