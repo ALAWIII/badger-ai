@@ -132,6 +132,10 @@ import Button from "primevue/button";
 
 import type { Prompt, AIProvider } from "@/utils/models";
 import { updatePrompt } from "@/utils/storage";
+const promptsList = inject<Ref<Prompt[]>>("promptsList");
+if (!promptsList) {
+    throw new Error("promptsList was not provided");
+}
 
 const dPrompt = defineModel<Prompt | null>("dPrompt");
 
@@ -174,7 +178,7 @@ function closeDialog() {
 
 async function saveDialog() {
     if (!draft.value) return;
-    await updatePrompt(draft.value);
+    await updatePrompt(promptsList!.value, draft.value);
     dPrompt.value = draft.value;
     closeDialog();
 }
