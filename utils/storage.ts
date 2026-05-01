@@ -49,7 +49,7 @@ export async function getProviders(): Promise<AIProvider[]> {
   const { providers = [] } = await browser.storage.local.get("providers");
   return providers as AIProvider[];
 }
-export async function updateProvider(
+export async function upsertProvider(
   providersList: AIProvider[],
   updatedProvider: AIProvider,
 ): Promise<void> {
