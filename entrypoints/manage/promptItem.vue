@@ -10,7 +10,8 @@
         </div>
         <div
             name="prompt-label"
-            class="flex-10/12 h-full hover:bg-yellow-50/10 place-content-center"
+            class="flex-10/12 h-full hover:bg-yellow-50/10 place-content-center cursor-pointer"
+            @click="openDialog"
         >
             {{ prompt?.label }}
         </div>
@@ -20,11 +21,19 @@
         >
             <v-icon name="bi-trash" class="h-full text-red-600" />
         </div>
+        <PromptDialog v-model:dPrompt="dPrompt" :providers="providersList" />
     </div>
 </template>
 <script setup lang="ts">
-import { Prompt } from "@/utils/models";
-defineProps<{
+import { ref, inject, type Ref } from "vue";
+import PromptDialog from "./editDialog.vue";
+import { AIProvider, Prompt } from "@/utils/models";
+const { prompt } = defineProps<{
     prompt: Prompt;
 }>();
+const dPrompt = ref<Prompt | null>(null);
+function openDialog() {
+    dPrompt.value = prompt;
+}
+const providersList = inject<Ref<AIProvider[]>>("providersList", ref([]));
 </script>
