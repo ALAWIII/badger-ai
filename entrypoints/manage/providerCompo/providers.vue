@@ -31,7 +31,6 @@
 </template>
 <script setup lang="ts">
 import { AIProvider } from "@/utils/models";
-import { provide } from "vue";
 import ProviderItem from "./providerItem.vue";
 import ProviderDialog from "./providerDialog.vue";
 import { getProviders, reorderProviders } from "@/utils/storage";

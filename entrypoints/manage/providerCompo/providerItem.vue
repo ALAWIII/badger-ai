@@ -29,18 +29,25 @@
 import { ref } from "vue";
 import ProviderDialog from "./providerDialog.vue";
 import { AIProvider } from "@/utils/models";
-import { deleteProvider, getProviders } from "@/utils/storage";
+import { deleteProvider, getProviders, savePrompts } from "@/utils/storage";
 const { provider } = defineProps<{
     provider: AIProvider;
 }>();
 const dProvider = ref<AIProvider | null>(null);
 const providersList = inject<Ref<AIProvider[]>>("providersList");
-
+const promptsList = inject<Ref<Prompt[]>>("promptsList");
 function openDialog() {
     dProvider.value = provider;
 }
 async function removeProvider() {
     await deleteProvider(providersList!.value, provider.id);
     providersList!.value = [...(await getProviders())];
+
+    const promptsUpdated = (promptsList?.value ?? []).map((p) =>
+        p.providerId === provider.id ? { ...p, providerId: null } : p,
+    );
+
+    await savePrompts(promptsUpdated);
+    promptsList!.value = [...promptsUpdated];
 }
 </script>
