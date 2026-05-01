@@ -34,7 +34,7 @@ const { provider } = defineProps<{
 const dProvider = ref<AIProvider | null>(null);
 const providersList = inject<Ref<AIProvider[]>>("providersList");
 if (!providersList) {
-    throw new Error("promptsList was not provided");
+    throw new Error("providersList was not provided");
 }
 function openDialog() {
     dProvider.value = provider;
