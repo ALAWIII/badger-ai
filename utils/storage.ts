@@ -15,13 +15,15 @@ export async function getPrompts(): Promise<Prompt[]> {
 export async function savePrompts(prompts: Prompt[]): Promise<void> {
   await browser.storage.local.set({ prompts });
 }
-export async function updatePrompt(
+export async function upsertPrompt(
   promptsList: Prompt[],
   updatedPrompt: Prompt,
 ): Promise<void> {
-  const updatedPrompts = promptsList.map((p) =>
-    p.id === updatedPrompt.id ? updatedPrompt : p,
-  );
+  const exists = promptsList.some((p) => p.id === updatedPrompt.id);
+
+  const updatedPrompts = exists
+    ? promptsList.map((p) => (p.id === updatedPrompt.id ? updatedPrompt : p))
+    : [...promptsList, updatedPrompt];
 
   await savePrompts(updatedPrompts);
 }
@@ -57,9 +59,13 @@ export async function updateProvider(
   providersList: AIProvider[],
   updatedProvider: AIProvider,
 ): Promise<void> {
-  const updatedProviders = providersList.map((p) =>
-    p.id === updatedProvider.id ? updatedProvider : p,
-  );
+  const exists = providersList.some((p) => p.id === updatedProvider.id);
+
+  const updatedProviders = exists
+    ? providersList.map((p) =>
+        p.id === updatedProvider.id ? updatedProvider : p,
+      )
+    : [...providersList, updatedProvider];
 
   await saveProviders(updatedProviders);
 }
