@@ -8,7 +8,7 @@ export interface AIProvider {
   id: string; //uuid
   name: string;
   apiKey: string;
-  baseUrl: string;
+  url: string;
   model?: string;
   requestTemplate: string; // user writes/pastes this
   responsePath: string;
