@@ -18,6 +18,7 @@
         <div
             name="remove-button"
             class="flex-1/12 border-r-white/50 hover:bg-white/10 h-full rounded-r-2xl"
+            @click="removePrompt"
         >
             <v-icon name="bi-trash" class="h-full text-red-600" />
         </div>
@@ -28,11 +29,20 @@
 import { ref } from "vue";
 import PromptDialog from "./PromptDialog.vue";
 import { Prompt } from "@/utils/models";
+import { deletePrompt } from "@/utils/storage";
 const { prompt } = defineProps<{
     prompt: Prompt;
 }>();
 const dPrompt = ref<Prompt | null>(null);
+const promptsList = inject<Ref<Prompt[]>>("promptsList");
+if (!promptsList) {
+    throw new Error("promptsList was not provided");
+}
 function openDialog() {
     dPrompt.value = prompt;
+}
+async function removePrompt() {
+    await deletePrompt(promptsList!.value, prompt.id);
+    promptsList!.value = [...(await getPrompts())];
 }
 </script>
