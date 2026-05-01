@@ -20,24 +20,14 @@
     </div>
 </template>
 <script setup lang="ts">
-import { getPrompts, addPrompt } from "@/utils/storage";
+import { getPrompts } from "@/utils/storage";
 import { Prompt } from "@/utils/models";
-import { ref, onMounted, type Ref } from "vue";
+import { ref, onMounted } from "vue";
 import PromptItem from "./promptItem.vue";
 
-const promptsList = ref<Prompt[]>([
-    {
-        id: "lola",
-        label: "shawarma",
-        providerId: null,
-        systemPrompt: "kill",
-    },
-]);
-/*
+const promptsList = ref<Prompt[]>([]);
 onMounted(async () => {
-    promptsList.value = [
-
-        ...(await getPrompts()),
-    ];
-    });*/
+    promptsList.value = [...(await getPrompts())];
+});
+provide("promptsList", promptsList);
 </script>
