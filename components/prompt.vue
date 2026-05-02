@@ -41,7 +41,7 @@ async function sendRequest() {
     }
 
     const prov = providersList!.value.find((p) => {
-        p.id == prompt.providerId;
+        return p.id === prompt.providerId;
     })!;
     const tmp: TemplateVars = {
         prompt,
