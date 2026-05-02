@@ -75,17 +75,18 @@ async function handleClick() {
     promptsList.value = await getPrompts();
     providersList.value = await getProviders();
 }
+const iconUrl = browser.runtime.getURL("/icon.svg");
 </script>
 
 <template>
     <button
         id="badger-popupicon"
         v-if="showIcon && !showMenu"
-        class="floating-icon"
+        class="fixed z-2147483647 min-w-fit min-h-fit rounded-lg bg-yellow-50 shadow-md cursor-pointer select-none pointer-events-auto"
         :style="{ top: y + 'px', left: x + 'px' }"
         @mousedown.prevent="handleClick"
     >
-        🔍
+        <img :src="iconUrl" alt="Popup icon" class="w-6 h-6" />
     </button>
     <div
         id="menu-response-container"
@@ -97,18 +98,3 @@ async function handleClick() {
         <ResponseCard v-if="responseText != null"></ResponseCard>
     </div>
 </template>
-<style>
-.floating-icon {
-    min-height: fit;
-    min-width: fit;
-    position: fixed;
-    z-index: 2147483647;
-    background: cyan;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    font-size: 18px;
-    user-select: none;
-    pointer-events: all;
-}
-</style>
