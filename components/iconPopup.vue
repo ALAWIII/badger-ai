@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import QMenu from "./quickPromptMenu.vue";
 import Menu from "@/components/menu.vue";
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, provide } from "vue";
 import { getSelectedText, getSelectionPosition } from "@/utils/selection";
+import { Prompt, AIProvider } from "@/utils/models";
+import { getPrompts, getProviders } from "@/utils/storage";
 const showIcon = ref(false);
 const showMenu = ref(false);
 const showQMenu = ref(false);
@@ -14,6 +16,10 @@ provide("globalSelection", globalSelection);
 provide("showQMenu", showQMenu);
 provide("selectedContent", selectedContent);
 
+const promptsList = ref<Prompt[]>([]);
+const providersList = ref<AIProvider[]>([]);
+provide("providersList", providersList);
+provide("promptsList", promptsList);
 function onMouseUp() {
     if (showQMenu.value || showMenu.value) {
         showIcon.value = false;
@@ -57,10 +63,12 @@ onUnmounted(() => {
     document.removeEventListener("mousedown", onMouseDown);
 });
 
-function handleClick() {
+async function handleClick() {
     showIcon.value = false;
     showMenu.value = true;
     showQMenu.value = false;
+    promptsList.value = await getPrompts();
+    providersList.value = await getProviders();
 }
 </script>
 
