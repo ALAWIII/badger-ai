@@ -22,7 +22,7 @@
         </div>
 
         <div class="flex flex-col flex-10/12 gap-1 w-full overflow-hidden">
-            <h3 class="text-center shrink-0">Quick Edit</h3>
+            <h3 class="text-center shrink-0 text-white">Quick Edit</h3>
 
             <textarea
                 v-model="localSystemPrompt"

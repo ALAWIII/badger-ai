@@ -161,7 +161,7 @@ const iconUrl = browser.runtime.getURL("/icon.svg");
     <div
         ref="menuContainer"
         id="menu-response-container"
-        class="flex fixed z-2147483647 min-w-fit min-h-fit justify-between gap-2"
+        class="flex fixed z-2147483647 min-w-fit min-h-fit justify-between gap-2 text-white"
         :style="{ top: `${menuY}px`, left: `${menuX}px` }"
     >
         <Menu v-if="showMenu" />
