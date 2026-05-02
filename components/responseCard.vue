@@ -5,7 +5,7 @@
         <div class="flex justify-end">
             <button
                 type="button"
-                class="rounded-lg border border-white/20 px-3 py-1 text-sm hover:bg-white/10"
+                class="rounded-lg border border-white/20 px-3 py-1 text-sm hover:bg-white/10 text-white"
                 @click="copyResponse"
             >
                 {{ copied ? "Copied" : "Copy" }}
@@ -13,7 +13,7 @@
         </div>
 
         <div
-            class="overflow-y-auto whitespace-pre-wrap wrap-break-words rounded-lg bg-zinc-900 p-3 text-white"
+            class="overflow-y-scroll whitespace-pre-wrap wrap-break-words rounded-lg bg-zinc-900 p-3 text-white"
         >
             {{ responseText }}
         </div>
