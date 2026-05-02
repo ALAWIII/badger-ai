@@ -13,9 +13,9 @@
         </div>
         <div class="flex flex-col flex-7/12 gap-0.5 w-full">
             <h3 class="flex-1/12 text-center">Quick Edit</h3>
-            <textarea class="flex-11/12 w-full outline-none">
-                {{ selectedContent }}
-            </textarea>
+            <textarea class="flex-11/12 w-full outline-none">{{
+                selectedContent
+            }}</textarea>
         </div>
     </div>
 </template>
