@@ -43,7 +43,7 @@ export async function sendPrompt(template: TemplateVars): Promise<string> {
 
   let response: Response;
   try {
-    response = await fetch(template.provider.baseUrl, fetchOptions);
+    response = await fetch(template.provider.url, fetchOptions);
   } catch (e) {
     throw new Error(
       `Network error — check your base URL or internet connection: ${getErrorMessage(e)}`,
