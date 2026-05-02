@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import QMenu from "./quickPromptMenu.vue";
 import Menu from "@/components/menu.vue";
+import ResponseCard from "./responseCard.vue";
 import { ref, onMounted, onUnmounted, provide } from "vue";
 import { getSelectedText, getSelectionPosition } from "@/utils/selection";
 import { Prompt, AIProvider } from "@/utils/models";
@@ -91,6 +92,7 @@ async function handleClick() {
     >
         <Menu v-if="showMenu"></Menu>
         <QMenu v-if="showQMenu != null"></QMenu>
+        <ResponseCard v-if="responseText != null"></ResponseCard>
     </div>
 </template>
 <style>
