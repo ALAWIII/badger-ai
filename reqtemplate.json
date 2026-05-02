@@ -1,0 +1,101 @@
+[
+  {
+    "id": "",
+    "name": "OpenAI",
+    "apiKey": "",
+    "url": "https://api.openai.com/v1/chat/completions",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Authorization\":\"Bearer {{apiKey}}\",\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"temperature\":0.2,\"max_tokens\":1000,\"stream\":false}}",
+    "responsePath": "choices.0.message.content"
+  },
+  {
+    "id": "",
+    "name": "Perplexity",
+    "apiKey": "",
+    "url": "https://api.perplexity.ai/chat/completions",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Authorization\":\"Bearer {{apiKey}}\",\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"temperature\":0.2,\"max_tokens\":1000,\"stream\":false}}",
+    "responsePath": "choices.0.message.content"
+  },
+  {
+    "id": "",
+    "name": "DeepSeek",
+    "apiKey": "",
+    "url": "https://api.deepseek.com/chat/completions",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Authorization\":\"Bearer {{apiKey}}\",\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"temperature\":0.2,\"max_tokens\":1000,\"stream\":false}}",
+    "responsePath": "choices.0.message.content"
+  },
+  {
+    "id": "",
+    "name": "Groq",
+    "apiKey": "",
+    "url": "https://api.groq.com/openai/v1/chat/completions",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Authorization\":\"Bearer {{apiKey}}\",\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"temperature\":0.2,\"max_tokens\":1000,\"stream\":false}}",
+    "responsePath": "choices.0.message.content"
+  },
+  {
+    "id": "",
+    "name": "Mistral",
+    "apiKey": "",
+    "url": "https://api.mistral.ai/v1/chat/completions",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Authorization\":\"Bearer {{apiKey}}\",\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"temperature\":0.2,\"max_tokens\":1000,\"stream\":false}}",
+    "responsePath": "choices.0.message.content"
+  },
+  {
+    "id": "",
+    "name": "OpenRouter",
+    "apiKey": "",
+    "url": "https://openrouter.ai/api/v1/chat/completions",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Authorization\":\"Bearer {{apiKey}}\",\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"temperature\":0.2,\"max_tokens\":1000,\"stream\":false}}",
+    "responsePath": "choices.0.message.content"
+  },
+  {
+    "id": "",
+    "name": "xAI Grok",
+    "apiKey": "",
+    "url": "https://api.x.ai/v1/chat/completions",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Authorization\":\"Bearer {{apiKey}}\",\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"temperature\":0.2,\"max_tokens\":1000,\"stream\":false}}",
+    "responsePath": "choices.0.message.content"
+  },
+  {
+    "id": "",
+    "name": "Google Gemini (OpenAI-compatible)",
+    "apiKey": "",
+    "url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Authorization\":\"Bearer {{apiKey}}\",\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"temperature\":0.2,\"max_tokens\":1000,\"stream\":false}}",
+    "responsePath": "choices.0.message.content"
+  },
+  {
+    "id": "",
+    "name": "Claude (Anthropic)",
+    "apiKey": "",
+    "url": "https://api.anthropic.com/v1/messages",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"x-api-key\":\"{{apiKey}}\",\"anthropic-version\":\"2023-06-01\",\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"max_tokens\":1000,\"system\":\"{{systemPrompt}}\",\"messages\":[{\"role\":\"user\",\"content\":\"{{selectedText}}\"}]}}",
+    "responsePath": "content.0.text"
+  },
+  {
+    "id": "",
+    "name": "Ollama (OpenAI-compatible)",
+    "apiKey": "",
+    "url": "http://localhost:11434/v1/chat/completions",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"temperature\":0.2,\"max_tokens\":1000,\"stream\":false}}",
+    "responsePath": "choices.0.message.content"
+  },
+  {
+    "id": "",
+    "name": "Ollama (Native)",
+    "apiKey": "",
+    "url": "http://localhost:11434/api/chat",
+    "model": "",
+    "requestTemplate": "{\"method\":\"POST\",\"headers\":{\"Content-Type\":\"application/json\"},\"body\":{\"model\":\"{{model}}\",\"messages\":[{\"role\":\"system\",\"content\":\"{{systemPrompt}}\"},{\"role\":\"user\",\"content\":\"{{selectedText}}\"}],\"stream\":false}}",
+    "responsePath": "message.content"
+  }
+]
