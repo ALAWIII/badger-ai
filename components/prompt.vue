@@ -27,6 +27,7 @@ const { prompt } = defineProps<{
     prompt: Prompt;
 }>();
 const showQMenu = inject<Ref<Prompt | null>>("showQMenu");
+const showMenu = inject<Ref<boolean>>("showMenu");
 const providersList = inject<Ref<AIProvider[]>>("providersList");
 const selectedContent = inject<Ref<string>>("selectedContent");
 const responseText = inject<Ref<string | null>>("responseText");
@@ -38,6 +39,7 @@ async function sendRequest() {
         showQMenu!.value = prompt;
         return;
     }
+
     const prov = providersList!.value.find((p) => {
         p.id == prompt.providerId;
     })!;
@@ -46,6 +48,8 @@ async function sendRequest() {
         provider: prov,
         selectedText: selectedContent!.value,
     };
+    showQMenu!.value = null;
+    showMenu!.value = false;
     try {
         const resp = await sendPrompt(tmp);
         responseText!.value = resp;

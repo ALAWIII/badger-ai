@@ -19,6 +19,7 @@ const responseText = ref<string | null>(null);
 
 provide("globalSelection", globalSelection);
 provide("showQMenu", showQMenu);
+provide("showMenu", showMenu);
 provide("selectedContent", selectedContent);
 
 provide("providersList", providersList);
