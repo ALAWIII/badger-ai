@@ -25,6 +25,18 @@ provide("selectedContent", selectedContent);
 
 provide("providersList", providersList);
 provide("promptsList", promptsList);
+const showDelayedIcon = ref(false);
+let iconTimer: ReturnType<typeof setTimeout> | null = null;
+
+function scheduleIcon() {
+    showDelayedIcon.value = false;
+
+    if (iconTimer) clearTimeout(iconTimer);
+
+    iconTimer = setTimeout(() => {
+        showDelayedIcon.value = true;
+    }, 400); // 400ms delay
+}
 function onMouseUp() {
     if (showQMenu.value || showMenu.value) {
         showIcon.value = false;
@@ -42,6 +54,7 @@ function onMouseUp() {
     x.value = rect.left + rect.width / 2 - 16;
     y.value = rect.bottom + 10;
     showIcon.value = true;
+    scheduleIcon();
 }
 
 function onMouseDown(e: MouseEvent) {
@@ -81,7 +94,7 @@ const iconUrl = browser.runtime.getURL("/icon.svg");
 <template>
     <button
         id="badger-popupicon"
-        v-if="showIcon && !showMenu"
+        v-if="showIcon && showDelayedIcon && !showMenu"
         class="fixed z-2147483647 min-w-fit min-h-fit rounded-lg bg-yellow-50 shadow-md cursor-pointer select-none pointer-events-auto"
         :style="{ top: y + 'px', left: x + 'px' }"
         @mousedown.prevent="handleClick"
