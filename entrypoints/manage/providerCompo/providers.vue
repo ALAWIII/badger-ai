@@ -7,7 +7,13 @@
             id="provider-header"
             class="flex flex-row w-full flex-1/12 text-center items-center border border-white/50 rounded-2xl"
         >
-            <h2 class="flex-11/12">Providers</h2>
+            <div
+                class="flex-1/12 h-full w-full active:bg-white/0 hover:bg-white/20 mr-auto rounded-l-2xl border-r border-white/50 place-content-center p-1 select-none"
+                @click="loadDefaultProviders"
+            >
+                default providers
+            </div>
+            <h2 class="flex-10/12">Providers</h2>
             <div
                 class="flex-1/12 h-full w-full active:bg-white/0 hover:bg-white/20 mr-auto rounded-r-2xl border-l border-white/50"
                 @click="createNewProvider"
@@ -33,7 +39,12 @@
 import { AIProvider } from "@/utils/models";
 import ProviderItem from "./providerItem.vue";
 import ProviderDialog from "./providerDialog.vue";
-import { getProviders, reorderProviders } from "@/utils/storage";
+import {
+    getProviders,
+    reorderProviders,
+    fetchDefaultProviders,
+    saveProviders,
+} from "@/utils/storage";
 import { v4 } from "uuid";
 import { useDraggable } from "vue-draggable-plus";
 
@@ -62,4 +73,11 @@ const draggable = useDraggable(provlist, providersList, {
         await reorderProviders(providersList!.value);
     },
 });
+
+async function loadDefaultProviders() {
+    const dproviders = await fetchDefaultProviders();
+    const unifiedList = [...dproviders, ...providersList!.value];
+    await saveProviders(unifiedList);
+    providersList!.value = unifiedList;
+}
 </script>
