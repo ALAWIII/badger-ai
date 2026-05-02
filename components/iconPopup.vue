@@ -48,14 +48,14 @@ function onMouseDown(e: MouseEvent) {
     //It hides the icon when the user clicks anywhere on the page, but keeps it visible if they click the icon itself.
     if (
         (e.target as HTMLElement).closest("#badger-popupicon") ||
-        (e.target as HTMLElement).closest("#badger-menu") ||
-        (e.target as HTMLElement).closest("#quick-menu")
+        (e.target as HTMLElement).closest("#menu-response-container")
     )
         return;
 
     showIcon.value = false;
     showMenu.value = false;
     showQMenu.value = null;
+    responseText.value = null;
 }
 
 onMounted(() => {
@@ -88,6 +88,7 @@ async function handleClick() {
         🔍
     </button>
     <div
+        id="menu-response-container"
         class="flex fixed z-2147483647 min-w-fit min-h-fit justify-between gap-2"
         :style="{ top: y + 'px', left: x + 'px' }"
     >
