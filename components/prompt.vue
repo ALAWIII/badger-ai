@@ -3,6 +3,7 @@
         <div class="flex-11/12 overflow-hidden hover:bg-amber-50/20">
             <button
                 class="w-full h-full p-2 text-center text-nowrap text-white"
+                @click="sendRequest"
             >
                 {{ prompt.label }}
             </button>
@@ -19,12 +20,37 @@
 
 <script setup lang="ts">
 import { inject, type Ref } from "vue";
-import type { Prompt } from "@/utils/models";
+import type { Prompt, TemplateVars, AIProvider } from "@/utils/models";
+import { sendPrompt } from "@/utils/api";
+import { getErrorMessage } from "@/utils/errors";
 const { prompt } = defineProps<{
     prompt: Prompt;
 }>();
-const showQMenu = inject<Ref<Boolean>>("showQMenu");
+const showQMenu = inject<Ref<Prompt | null>>("showQMenu");
+const providersList = inject<Ref<AIProvider[]>>("providersList");
+const selectedContent = inject<Ref<string>>("selectedContent");
+const responseText = inject<Ref<string | null>>("responseText");
 function toogleQMenu() {
-    showQMenu!.value = !showQMenu!.value;
+    showQMenu!.value = showQMenu?.value == null ? prompt : null;
+}
+async function sendRequest() {
+    if (!prompt.providerId) {
+        showQMenu!.value = prompt;
+        return;
+    }
+    const prov = providersList!.value.find((p) => {
+        p.id == prompt.providerId;
+    })!;
+    const tmp: TemplateVars = {
+        prompt,
+        provider: prov,
+        selectedText: selectedContent!.value,
+    };
+    try {
+        const resp = await sendPrompt(tmp);
+        responseText!.value = resp;
+    } catch (err) {
+        responseText!.value = getErrorMessage(err);
+    }
 }
 </script>
