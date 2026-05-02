@@ -7,6 +7,6 @@ const promptsList = inject<Ref<Prompt[]>>("promptsList");
 
 <template>
     <div class="flex flex-col overflow-y-scroll w-full h-full">
-        <PromptItem v-for="n in 10" :key="n" />
+        <PromptItem v-for="p of promptsList" :prompt="p" :key="p.id" />
     </div>
 </template>

@@ -4,7 +4,7 @@
             <button
                 class="w-full h-full p-2 text-center text-nowrap text-white"
             >
-                prompt label active
+                {{ prompt.label }}
             </button>
         </div>
         <div
@@ -19,6 +19,10 @@
 
 <script setup lang="ts">
 import { inject, type Ref } from "vue";
+import type { Prompt } from "@/utils/models";
+const { prompt } = defineProps<{
+    prompt: Prompt;
+}>();
 const showQMenu = inject<Ref<Boolean>>("showQMenu");
 function toogleQMenu() {
     showQMenu!.value = !showQMenu!.value;
