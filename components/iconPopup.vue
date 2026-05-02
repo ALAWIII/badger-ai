@@ -16,6 +16,7 @@ const globalSelection = ref<Selection | null>(null);
 const promptsList = ref<Prompt[]>([]);
 const providersList = ref<AIProvider[]>([]);
 const responseText = ref<string | null>(null);
+provide("responseText", responseText);
 
 provide("globalSelection", globalSelection);
 provide("showQMenu", showQMenu);
@@ -24,7 +25,6 @@ provide("selectedContent", selectedContent);
 
 provide("providersList", providersList);
 provide("promptsList", promptsList);
-provide("responseText ", responseText);
 function onMouseUp() {
     if (showQMenu.value || showMenu.value) {
         showIcon.value = false;
