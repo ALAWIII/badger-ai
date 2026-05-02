@@ -2,43 +2,42 @@
 import { getErrorMessage } from "./errors";
 import { TemplateVars } from "./models";
 
-/**
- * substitutes fields values against requestTemplate placeholders and prepare the full request to be sent.
- */
-function resolveTemplate(vars: TemplateVars): any {
+function resolveTemplate(vars: TemplateVars): string {
   const map: Record<string, string> = {
     apiKey: vars.provider.apiKey,
     model: vars.provider.model ?? "",
-    systemPrompt: vars.prompt.systemPrompt,
+    systemPrompt: vars.prompt.systemPrompt ?? "",
     selectedText: vars.selectedText,
   };
 
-  const resolved = vars.provider.requestTemplate.replace(
-    /\{\{(\w+)\}\}/g,
-    (_, key) => (key in map ? map[key] : `{{${key}}}`),
+  return vars.provider.requestTemplate.replace(/\{\{(\w+)\}\}/g, (_, key) =>
+    key in map ? map[key] : `{{${key}}}`,
   );
-
-  return JSON.parse(resolved);
 }
+
 function extractResponse(data: any, path: string): string {
   return path.split(".").reduce((obj, key) => obj?.[key], data);
 }
 
 export async function sendPrompt(template: TemplateVars): Promise<string> {
-  let resolvedOptions: string;
+  let resolvedTemplate: string;
   try {
-    resolvedOptions = resolveTemplate(template);
+    resolvedTemplate = resolveTemplate(template);
   } catch (e) {
     throw new Error(`Template resolution failed: ${getErrorMessage(e)}`);
   }
 
   let fetchOptions: any;
   try {
-    fetchOptions = JSON.parse(resolvedOptions);
+    fetchOptions = JSON.parse(resolvedTemplate);
   } catch (e) {
     throw new Error(
       `Invalid JSON after template substitution — check your request template: ${getErrorMessage(e)}`,
     );
+  }
+
+  if (fetchOptions.body && typeof fetchOptions.body !== "string") {
+    fetchOptions.body = JSON.stringify(fetchOptions.body);
   }
 
   let response: Response;
@@ -59,14 +58,15 @@ export async function sendPrompt(template: TemplateVars): Promise<string> {
   let data: any;
   try {
     data = await response.json();
-  } catch (e) {
+  } catch {
     throw new Error(
       `Provider returned non-JSON response — check your base URL`,
     );
   }
 
   const result = extractResponse(data, template.provider.responsePath);
-  if (!result) {
+
+  if (typeof result !== "string" || !result.trim()) {
     throw new Error(
       `Could not extract response at path "${template.provider.responsePath}" — check your response path`,
     );
@@ -74,7 +74,6 @@ export async function sendPrompt(template: TemplateVars): Promise<string> {
 
   return result;
 }
-
 /*
 template example:
 {
