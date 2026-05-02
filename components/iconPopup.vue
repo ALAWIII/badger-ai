@@ -12,14 +12,17 @@ const x = ref(0);
 const y = ref(0);
 const selectedContent = ref("");
 const globalSelection = ref<Selection | null>(null);
+const promptsList = ref<Prompt[]>([]);
+const providersList = ref<AIProvider[]>([]);
+const responseText = ref<string | null>(null);
+
 provide("globalSelection", globalSelection);
 provide("showQMenu", showQMenu);
 provide("selectedContent", selectedContent);
 
-const promptsList = ref<Prompt[]>([]);
-const providersList = ref<AIProvider[]>([]);
 provide("providersList", providersList);
 provide("promptsList", promptsList);
+provide("responseText ", responseText);
 function onMouseUp() {
     if (showQMenu.value || showMenu.value) {
         showIcon.value = false;
