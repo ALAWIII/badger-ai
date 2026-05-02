@@ -7,7 +7,7 @@ import { Prompt, AIProvider } from "@/utils/models";
 import { getPrompts, getProviders } from "@/utils/storage";
 const showIcon = ref(false);
 const showMenu = ref(false);
-const showQMenu = ref(false);
+const showQMenu = ref<Prompt | null>(null);
 const x = ref(0);
 const y = ref(0);
 const selectedContent = ref("");
@@ -50,7 +50,7 @@ function onMouseDown(e: MouseEvent) {
 
     showIcon.value = false;
     showMenu.value = false;
-    showQMenu.value = false;
+    showQMenu.value = null;
 }
 
 onMounted(() => {
@@ -66,7 +66,7 @@ onUnmounted(() => {
 async function handleClick() {
     showIcon.value = false;
     showMenu.value = true;
-    showQMenu.value = false;
+    showQMenu.value = null;
     promptsList.value = await getPrompts();
     providersList.value = await getProviders();
 }
@@ -87,7 +87,7 @@ async function handleClick() {
         :style="{ top: y + 'px', left: x + 'px' }"
     >
         <Menu v-if="showMenu"></Menu>
-        <QMenu v-if="showQMenu"></QMenu>
+        <QMenu v-if="showQMenu != null"></QMenu>
     </div>
 </template>
 <style>
