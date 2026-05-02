@@ -47,7 +47,7 @@ function onMouseUp() {
 function onMouseDown(e: MouseEvent) {
     //It hides the icon when the user clicks anywhere on the page, but keeps it visible if they click the icon itself.
     if (
-        (e.target as HTMLElement).closest(".floating-icon") ||
+        (e.target as HTMLElement).closest("#badger-popupicon") ||
         (e.target as HTMLElement).closest("#badger-menu") ||
         (e.target as HTMLElement).closest("#quick-menu")
     )
@@ -79,7 +79,7 @@ async function handleClick() {
 
 <template>
     <button
-        id="popupicon"
+        id="badger-popupicon"
         v-if="showIcon && !showMenu"
         class="floating-icon"
         :style="{ top: y + 'px', left: x + 'px' }"
