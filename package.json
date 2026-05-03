@@ -1,8 +1,10 @@
 {
-  "name": "wxt-vue-starter",
-  "description": "manifest.json description",
+  "name": "badger-ai",
+  "description": "A browser extension that lets you run any AI prompt on selected text, with full control over providers and request templates. Configure your own API endpoints, models, and message structure — no vendor lock-in. ",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "author": "ALLAWIII",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "NODE_OPTIONS=--max-old-space-size=8192 wxt ",
